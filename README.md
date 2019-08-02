@@ -40,6 +40,52 @@ Create a new array called sortedPeople of type [`Human`] that is the people arra
 
 </br> </br>
 
+```
+class Human: CustomStringConvertible, Equatable, Comparable {
+    static func < (lhs: Human, rhs: Human) -> Bool {
+        if lhs.age > rhs.age {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    static func == (lhs: Human, rhs: Human) -> Bool {
+        if lhs.age == rhs.age && lhs.name == rhs.name {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    var description: String {
+        get {
+            return "My name is \(name) and I am \(age)"
+        }
+    }
+    var name: String
+    var age: Int
+    
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+}
+
+
+var kary = Human(name: "Kary", age: 50)
+var anthony = Human(name: "Anthony", age: 10)
+var michelle = Human(name: "Michelle", age: 55)
+var david = Human(name: "David", age: 30)
+var beyonce = Human(name: "Beyonce", age: 28)
+
+var humanArray = [kary, anthony, michelle, david, beyonce]
+
+var sortedPeople = humanArray.sorted(by: >)
+
+print(sortedPeople)
+
+```
 
 ## Question 2
 
@@ -57,6 +103,37 @@ then call drive().
 
 </br> </br>
 
+```
+protocol Vehicle {
+var numberOfWheels: Int { get }
+func drive()
+}
+
+struct Car: Vehicle {
+let numberOfWheels = 4
+
+func drive() {
+print("Vroom vroom!")
+}
+}
+
+var car1 = Car()
+car1.drive()
+print(car1.numberOfWheels)
+
+
+struct Bike: Vehicle {
+let numberOfWheels = 2
+func drive() {
+print( "Begin pedaling")
+}
+}
+
+var bike1 = Bike()
+bike1.drive()
+print(bike1.numberOfWheels)
+```
+
 
 ## Question 3
 // Given the below two protocols, create a struct for penguin(a flightless bird) and an eagle.
@@ -73,7 +150,20 @@ protocol Flyable {
  var airspeedVelocity: Double { get }
 }
 ```
+```
+struct Penguin: Bird {
+var name: String
+var canFly: Bool
+}
 
+struct Eagle: Flyable, Bird {
+var airspeedVelocity: Double
+
+var name: String
+
+var canFly: Bool
+}
+```
 </br> </br>
 
 ## Question 4
@@ -111,11 +201,38 @@ c. Create three Classes. `Cow`, `Dog`, `Cat`.
 
 d. Have your three classes conform to `Communication`
 
-e. `message` should return a unique message for each animal when talk is called.
+e. Put an instance of each of your classes in an array.
 
-f. Put an instance of each of your classes in an array.
+f. Iterate over the array and have them print their `message` property
 
-g. Iterate over the array and have them print their `message` property
+```
+protocol Communication {
+var message: String { get }
+}
+
+class Cow: Communication {
+var message: String { return "moo"}
+}
+
+class Dog: Communication {
+var message: String { return "arf"}
+}
+
+class Cat: Communication {
+var message: String {return "MEEE-YOWOWWWWWOWOWOWOWOWOW"}
+}
+
+var cowInstance = Cow()
+var dogInstance = Dog()
+var catInstance = Cat()
+
+
+var animalArray: [Communication] = [catInstance, dogInstance, cowInstance]
+
+for animals in animalArray {
+print(animals.message)
+}
+``` 
 
 
 ## Question 6
